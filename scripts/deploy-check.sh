@@ -69,11 +69,11 @@ else
   echo "skipping compose model validation: docker compose is unavailable"
 fi
 
-if command -v kubectl >/dev/null 2>&1; then
+if command -v kubectl >/dev/null 2>&1 && kubectl config current-context >/dev/null 2>&1; then
   echo "validating kubernetes manifest"
   kubectl apply --dry-run=client --validate=false -f deploy/kubernetes/goproxy.yaml >/dev/null
 else
-  echo "skipping kubernetes manifest validation: kubectl is unavailable"
+  echo "skipping kubernetes manifest validation: kubectl context is unavailable"
 fi
 
 if command -v systemd-analyze >/dev/null 2>&1; then
