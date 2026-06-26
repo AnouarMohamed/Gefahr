@@ -17,9 +17,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/anouar/goproxy/internal/app"
-	"github.com/anouar/goproxy/internal/config"
-	proxyhandler "github.com/anouar/goproxy/internal/proxy"
+	"github.com/anrorg/gefahr/internal/app"
+	"github.com/anrorg/gefahr/internal/config"
+	proxyhandler "github.com/anrorg/gefahr/internal/proxy"
 )
 
 func TestRoutingBalancingAndCachingOverRealSockets(t *testing.T) {

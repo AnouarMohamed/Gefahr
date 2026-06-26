@@ -69,7 +69,7 @@ Kubernetes:
 
 ```sh
 kubectl -n goproxy rollout history deployment/goproxy
-kubectl -n goproxy set image deployment/goproxy goproxy=ghcr.io/anouarmohamed/gefahr:<previous-version>
+kubectl -n goproxy set image deployment/goproxy goproxy=ghcr.io/anrorg/gefahr:<previous-version>
 kubectl -n goproxy rollout status deployment/goproxy
 ```
 

@@ -28,7 +28,7 @@ A production deployment should include:
 Use an immutable digest:
 
 ```yaml
-image: ghcr.io/anouarmohamed/gefahr@sha256:<digest>
+image: ghcr.io/anrorg/gefahr@sha256:<digest>
 ```
 
 Avoid `latest`. Avoid mutable tags for production.

@@ -10,9 +10,9 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/anouar/goproxy/internal/config"
-	"github.com/anouar/goproxy/internal/proxy"
-	"github.com/anouar/goproxy/internal/server"
+	"github.com/anrorg/gefahr/internal/config"
+	"github.com/anrorg/gefahr/internal/proxy"
+	"github.com/anrorg/gefahr/internal/server"
 )
 
 // Runtime owns the active proxy, health workers, configuration, and TLS stores.

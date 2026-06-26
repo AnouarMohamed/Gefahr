@@ -16,12 +16,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/anouar/goproxy/internal/admin"
-	"github.com/anouar/goproxy/internal/app"
-	"github.com/anouar/goproxy/internal/config"
-	"github.com/anouar/goproxy/internal/metrics"
-	"github.com/anouar/goproxy/internal/observability"
-	"github.com/anouar/goproxy/internal/server"
+	"github.com/anrorg/gefahr/internal/admin"
+	"github.com/anrorg/gefahr/internal/app"
+	"github.com/anrorg/gefahr/internal/config"
+	"github.com/anrorg/gefahr/internal/metrics"
+	"github.com/anrorg/gefahr/internal/observability"
+	"github.com/anrorg/gefahr/internal/server"
 )
 
 var (

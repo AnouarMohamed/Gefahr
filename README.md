@@ -1,6 +1,6 @@
 # Gefahr
-[![CodeQL](https://img.shields.io/github/actions/workflow/status/AnouarMohamed/Gefahr/codeql.yml?label=CodeQL&style=flat-square)](https://github.com/AnouarMohamed/Gefahr/actions/workflows/codeql.yml)
-[![CI](https://img.shields.io/github/actions/workflow/status/AnouarMohamed/Gefahr/ci.yml?branch=main&style=flat-square)](https://github.com/AnouarMohamed/Gefahr/actions/workflows/ci.yml) [![Go Version](https://img.shields.io/github/go-mod/go-version/AnouarMohamed/Gefahr?style=flat-square)](go.mod) [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE) [![Go Report Card](https://goreportcard.com/badge/github.com/AnouarMohamed/Gefahr?style=flat-square)](https://goreportcard.com/report/github.com/AnouarMohamed/Gefahr) [![codecov](https://img.shields.io/codecov/c/github/AnouarMohamed/Gefahr?style=flat-square)](https://codecov.io/gh/AnouarMohamed/Gefahr)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/ANRorg/Gefahr/codeql.yml?label=CodeQL&style=flat-square)](https://github.com/ANRorg/Gefahr/actions/workflows/codeql.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/ANRorg/Gefahr/ci.yml?branch=main&style=flat-square)](https://github.com/ANRorg/Gefahr/actions/workflows/ci.yml) [![Go Version](https://img.shields.io/github/go-mod/go-version/ANRorg/Gefahr?style=flat-square)](go.mod) [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE) [![Go Report Card](https://goreportcard.com/badge/github.com/ANRorg/Gefahr?style=flat-square)](https://goreportcard.com/report/github.com/ANRorg/Gefahr) [![codecov](https://img.shields.io/codecov/c/github/ANRorg/Gefahr?style=flat-square)](https://codecov.io/gh/ANRorg/Gefahr)
 
 <p align="center">
   <img src="assets/gefahr_turtle_v3.png" alt="Gefahr turtle mascot and wordmark" width="560">
@@ -46,7 +46,7 @@ curl http://localhost:8080/
 Tagged releases publish checksummed Linux, macOS, and Windows archives, SPDX
 SBOMs, and GitHub provenance/SBOM attestations. The multi-architecture
 container image is available as
-`ghcr.io/anouarmohamed/gefahr:<version>` for Linux AMD64 and ARM64.
+`ghcr.io/anrorg/gefahr:<version>` for Linux AMD64 and ARM64.
 
 The production image runs its health check against the private `/readyz`
 endpoint by invoking the `goproxy` binary's bounded `-healthcheck` mode; it does
@@ -111,6 +111,14 @@ complete final gate and expected evidence.
 
 The generated documentation portal lives in `gefahr-docs`. Product-facing docs
 are authored under `gefahr-docs/content` and built into the static site.
+
+## Project governance
+
+- Contributions: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Security reporting: [SECURITY.md](SECURITY.md)
+- Support policy: [SUPPORT.md](SUPPORT.md)
+- Maintainer governance: [GOVERNANCE.md](GOVERNANCE.md)
+- Ownership: [MAINTAINERS.md](MAINTAINERS.md)
 
 ## Security model and limitations
 

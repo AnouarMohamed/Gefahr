@@ -1,0 +1,34 @@
+name: Documentation issue
+description: Report missing, outdated, or confusing documentation.
+title: "docs: "
+labels: ["documentation", "needs-triage"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page or file
+      placeholder: docs/deployment-kubernetes.md
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong or missing?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should the docs say?
+      description: Include the operational context if this affects deployment or production readiness.
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - Blocks production deployment
+        - Causes operational confusion
+        - Minor correction
+        - Other
+    validations:
+      required: true

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 func TestFanoutForwardsAllObserverTypes(t *testing.T) {

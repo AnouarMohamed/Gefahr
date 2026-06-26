@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/anouar/goproxy/internal/backend"
+	"github.com/anrorg/gefahr/internal/backend"
 )
 
 func testBackends(names ...string) []*backend.Backend {

@@ -1,0 +1,34 @@
+name: Feature request
+description: Propose a production-oriented capability.
+title: "feat: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Operator or user problem
+      description: What production problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe config, runtime behavior, metrics, logs, and failure modes.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Include ingress, load balancer, service mesh, or upstream-app alternatives.
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility and rollout impact
+      description: Explain config migration, reload/restart requirements, rollback, and known risks.
+  - type: textarea
+    id: verification
+    attributes:
+      label: Acceptance plan
+      description: What tests, docs, deployment checks, and smoke tests should prove this feature?

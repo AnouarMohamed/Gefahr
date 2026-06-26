@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"sync/atomic"
 
-	"github.com/anouar/goproxy/internal/backend"
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/backend"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 // BackendObserver receives bounded backend gauges and transition updates.

@@ -1,4 +1,4 @@
-module github.com/anouar/goproxy
+module github.com/anrorg/gefahr
 
 go 1.25.11
 

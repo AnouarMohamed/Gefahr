@@ -114,7 +114,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: goproxy
-          image: ghcr.io/anouarmohamed/gefahr:v1.0.1
+          image: ghcr.io/anrorg/gefahr:v1.0.1
           imagePullPolicy: IfNotPresent
           args: ["-config", "/etc/goproxy/proxy.yaml"]
           env:

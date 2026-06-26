@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 var defaultClientIPHeaders = []string{"X-Forwarded-For", "X-Real-IP"}

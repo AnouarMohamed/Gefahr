@@ -44,7 +44,7 @@ function App() {
             <option value="main">main</option>
             <option value="v1">v1.x</option>
           </select>
-          <a className="icon-button" href="https://github.com/AnouarMohamed/Gefahr" aria-label="Open GitHub repository">
+          <a className="icon-button" href="https://github.com/ANRorg/Gefahr" aria-label="Open GitHub repository">
             <Github size={18} />
           </a>
         </div>
@@ -171,7 +171,7 @@ function DocView({ doc }: { doc: DocPage }) {
           </div>
           <h1>{doc.title}</h1>
           <p>{doc.summary}</p>
-          <a className="source-link" href={`https://github.com/AnouarMohamed/Gefahr/blob/main/${doc.sourcePath}`}>
+          <a className="source-link" href={`https://github.com/ANRorg/Gefahr/blob/main/${doc.sourcePath}`}>
             Edit this page: {doc.sourcePath}
           </a>
         </header>

@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 type requestKey struct {

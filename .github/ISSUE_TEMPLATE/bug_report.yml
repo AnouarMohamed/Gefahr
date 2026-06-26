@@ -1,0 +1,71 @@
+name: Bug report
+description: Report a reproducible Gefahr defect.
+title: "bug: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not report security vulnerabilities here. Use private vulnerability reporting from SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Release tag, commit SHA, image digest, or package checksum.
+      placeholder: v1.0.2 / sha256:...
+    validations:
+      required: true
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: Deployment mode
+      options:
+        - Kubernetes
+        - systemd
+        - Docker Compose
+        - Local binary
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Redacted config
+      description: Include the smallest config that reproduces the issue.
+      render: yaml
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Start Gefahr with ...
+        2. Send request ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs, metrics, and command output
+      description: Remove tokens, private keys, cookies, and user data.
+      render: text
+  - type: textarea
+    id: verification
+    attributes:
+      label: Validation already run
+      description: Include `make acceptance`, `make coverage`, `make deploy-check`, or staging smoke output when relevant.
+      render: text

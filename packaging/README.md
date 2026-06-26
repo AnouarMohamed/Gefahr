@@ -20,7 +20,7 @@ the required variables and secrets are configured.
 Configure:
 
 - Repository variable `HOMEBREW_TAP_REPOSITORY`, for example
-  `AnouarMohamed/homebrew-tap`.
+  `ANRorg/homebrew-tap`.
 - Secret `HOMEBREW_TAP_TOKEN`, a token with write access to that tap.
 
 The release workflow copies `dist/gefahr.rb` to `Formula/gefahr.rb` in the tap
@@ -33,7 +33,7 @@ Rollback is a normal tap commit revert.
 Configure:
 
 - Repository variable `APT_REPO_REPOSITORY`, for example
-  `AnouarMohamed/gefahr-apt`.
+  `ANRorg/gefahr-apt`.
 - Optional repository variable `APT_REPO_DISTRIBUTION`, default `stable`.
 - Optional repository variable `APT_REPO_COMPONENT`, default `main`.
 - Secret `APT_REPO_TOKEN`, a token with write access to the apt repository.

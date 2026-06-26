@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 // CertificateStore atomically serves a reloadable TLS certificate.

@@ -3,7 +3,7 @@ package balance
 import (
 	"sync/atomic"
 
-	"github.com/anouar/goproxy/internal/backend"
+	"github.com/anrorg/gefahr/internal/backend"
 )
 
 // LeastConnections selects the healthy backend with the fewest active

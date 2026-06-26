@@ -1,6 +1,6 @@
 [Unit]
 Description=Gefahr reverse proxy
-Documentation=https://github.com/AnouarMohamed/Gefahr
+Documentation=https://github.com/ANRorg/Gefahr
 Wants=network-online.target
 After=network-online.target
 StartLimitIntervalSec=60

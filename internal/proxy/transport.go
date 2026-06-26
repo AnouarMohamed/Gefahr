@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 // NewTransport returns a bounded, HTTP/2-capable upstream connection pool.

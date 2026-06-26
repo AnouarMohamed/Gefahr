@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	responsecache "github.com/anouar/goproxy/internal/cache"
-	"github.com/anouar/goproxy/internal/config"
+	responsecache "github.com/anrorg/gefahr/internal/cache"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 func proxyConfig() config.Config {

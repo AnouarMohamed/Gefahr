@@ -15,7 +15,7 @@ production, pin an exact release artifact or image digest.
 Use this path for development and local validation:
 
 ```sh
-git clone https://github.com/AnouarMohamed/Gefahr.git
+git clone https://github.com/ANRorg/Gefahr.git
 cd Gefahr
 go build -trimpath -o bin/goproxy ./cmd/goproxy
 ./bin/goproxy -version
@@ -35,13 +35,13 @@ The build target injects version and commit metadata into the binary.
 Release images are published to GitHub Container Registry:
 
 ```sh
-docker pull ghcr.io/anouarmohamed/gefahr:<version>
+docker pull ghcr.io/anrorg/gefahr:<version>
 ```
 
 For production, deploy by digest:
 
 ```sh
-ghcr.io/anouarmohamed/gefahr@sha256:<digest>
+ghcr.io/anrorg/gefahr@sha256:<digest>
 ```
 
 Pinning by digest prevents a mutable tag from changing what runs in a cluster.

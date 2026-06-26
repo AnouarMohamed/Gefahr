@@ -16,11 +16,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/anouar/goproxy/internal/backend"
-	"github.com/anouar/goproxy/internal/balance"
-	responsecache "github.com/anouar/goproxy/internal/cache"
-	"github.com/anouar/goproxy/internal/config"
-	"github.com/anouar/goproxy/internal/routing"
+	"github.com/anrorg/gefahr/internal/backend"
+	"github.com/anrorg/gefahr/internal/balance"
+	responsecache "github.com/anrorg/gefahr/internal/cache"
+	"github.com/anrorg/gefahr/internal/config"
+	"github.com/anrorg/gefahr/internal/routing"
 )
 
 type runtimePool struct {

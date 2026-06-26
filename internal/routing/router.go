@@ -5,7 +5,7 @@ import (
 	"net"
 	"strings"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 // Router is an immutable host-indexed route table.

@@ -3,7 +3,7 @@ package observability
 import (
 	"time"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 // RequestObserver receives completed public request records.

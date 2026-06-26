@@ -3,7 +3,7 @@ package routing
 import (
 	"testing"
 
-	"github.com/anouar/goproxy/internal/config"
+	"github.com/anrorg/gefahr/internal/config"
 )
 
 func TestCandidatesMatchesHostCaseInsensitivelyWithoutPort(t *testing.T) {

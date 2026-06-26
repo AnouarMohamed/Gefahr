@@ -4,7 +4,7 @@ package balance
 import (
 	"errors"
 
-	"github.com/anouar/goproxy/internal/backend"
+	"github.com/anrorg/gefahr/internal/backend"
 )
 
 // ErrNoHealthyBackend means no configured backend can receive traffic.

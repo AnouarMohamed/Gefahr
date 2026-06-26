@@ -1,0 +1,11 @@
+# Keep this file valid in GitHub. Replace the user owner with an ANRorg team
+# after the organization creates a dedicated maintainers team with write access.
+
+* @AnouarMohamed
+
+.github/ @AnouarMohamed
+deploy/ @AnouarMohamed
+docs/ @AnouarMohamed
+gefahr-docs/ @AnouarMohamed
+internal/proxy/ @AnouarMohamed
+internal/config/ @AnouarMohamed

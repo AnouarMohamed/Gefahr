@@ -49,15 +49,15 @@ workflow jobs complete before announcing the release.
 Verify release integrity from a machine with GitHub CLI access:
 
 ```sh
-gh attestation verify dist/gefahr_1.0.2_linux_amd64.tar.gz -R AnouarMohamed/Gefahr
-gh attestation verify oci://ghcr.io/anouarmohamed/gefahr:v1.0.2 -R AnouarMohamed/Gefahr
+gh attestation verify dist/gefahr_1.0.2_linux_amd64.tar.gz -R ANRorg/Gefahr
+gh attestation verify oci://ghcr.io/anrorg/gefahr:v1.0.2 -R ANRorg/Gefahr
 ```
 
 For SBOM attestations, include the SPDX predicate type:
 
 ```sh
 gh attestation verify dist/gefahr_1.0.2_linux_amd64.tar.gz \
-  -R AnouarMohamed/Gefahr \
+  -R ANRorg/Gefahr \
   --predicate-type https://spdx.dev/Document/v2.3
 ```
 
@@ -67,15 +67,15 @@ Verify cosign signatures for release files:
 cosign verify-blob dist/gefahr_1.0.2_linux_amd64.tar.gz \
   --signature dist/gefahr_1.0.2_linux_amd64.tar.gz.sig \
   --certificate dist/gefahr_1.0.2_linux_amd64.tar.gz.pem \
-  --certificate-identity-regexp 'https://github.com/AnouarMohamed/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
+  --certificate-identity-regexp 'https://github.com/ANRorg/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
 Verify the signed image digest:
 
 ```sh
-cosign verify ghcr.io/anouarmohamed/gefahr:v1.0.2 \
-  --certificate-identity-regexp 'https://github.com/AnouarMohamed/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
+cosign verify ghcr.io/anrorg/gefahr:v1.0.2 \
+  --certificate-identity-regexp 'https://github.com/ANRorg/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 

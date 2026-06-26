@@ -25,7 +25,7 @@ only after checksums, attestations, and signatures have been verified.
 The container image is published to GitHub Container Registry:
 
 ```text
-ghcr.io/anouarmohamed/gefahr:<version>
+ghcr.io/anrorg/gefahr:<version>
 ```
 
 Stable SemVer releases also publish `latest`.
@@ -36,15 +36,15 @@ Stable SemVer releases also publish `latest`.
 cosign verify-blob dist/gefahr_1.0.2_linux_amd64.tar.gz \
   --signature dist/gefahr_1.0.2_linux_amd64.tar.gz.sig \
   --certificate dist/gefahr_1.0.2_linux_amd64.tar.gz.pem \
-  --certificate-identity-regexp 'https://github.com/AnouarMohamed/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
+  --certificate-identity-regexp 'https://github.com/ANRorg/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
 ## Verify an image signature
 
 ```sh
-cosign verify ghcr.io/anouarmohamed/gefahr:v1.0.2 \
-  --certificate-identity-regexp 'https://github.com/AnouarMohamed/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
+cosign verify ghcr.io/anrorg/gefahr:v1.0.2 \
+  --certificate-identity-regexp 'https://github.com/ANRorg/Gefahr/.github/workflows/release.yml@refs/tags/v1.0.2' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
@@ -52,12 +52,12 @@ cosign verify ghcr.io/anouarmohamed/gefahr:v1.0.2 \
 
 ```sh
 gh attestation verify dist/gefahr_1.0.2_linux_amd64.tar.gz \
-  -R AnouarMohamed/Gefahr
+  -R ANRorg/Gefahr
 ```
 
 ```sh
-gh attestation verify oci://ghcr.io/anouarmohamed/gefahr:v1.0.2 \
-  -R AnouarMohamed/Gefahr
+gh attestation verify oci://ghcr.io/anrorg/gefahr:v1.0.2 \
+  -R ANRorg/Gefahr
 ```
 
 ## Package repositories
