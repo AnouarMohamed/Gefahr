@@ -39,6 +39,9 @@ The supported cluster discovery model is Kubernetes Service-based discovery:
 configure backend URLs as stable Service DNS names, such as
 `http://app.default.svc.cluster.local:8080`.
 
+The detailed discovery and shared-state contract is documented in
+[service discovery and shared state](service-discovery-shared-state.md).
+
 Direct EndpointSlice watching is out of scope for the current product. Use it
 only after adding a clear consistency model, RBAC permissions, endpoint-change
 tests, and operator documentation. External service discovery is also out of

@@ -37,6 +37,9 @@ path, observability, and rollback process are ready together.
 - For Kubernetes replicas greater than one, cache, rate limits, backend health,
   and metrics are reviewed as per-pod behavior unless an external control
   provides global behavior.
+- Kubernetes backend URLs point at stable Services or explicitly approved
+  external load balancers; the baseline does not use EndpointSlice or external
+  discovery watchers.
 - Upstream TLS CA/SNI/client certificate settings are validated in staging.
 
 ## Deployment

@@ -11,6 +11,8 @@ For multi-replica behavior, read the
 baseline treats each pod as a stateless data-plane replica: backend health,
 cache entries, rate-limit counters, load-balancer counters, reload snapshots,
 and process metrics are local to each pod.
+For backend membership and shared-state boundaries, read
+[service discovery and shared state](service-discovery-shared-state.md).
 
 Before applying it to a real cluster:
 
@@ -51,6 +53,8 @@ Operational expectations:
 - Keep the admin Service restricted by NetworkPolicy and bearer authentication;
   the Kubernetes baseline binds the admin listener inside the pod so Prometheus
   or other monitoring workloads can scrape it through that restricted Service.
+- The baseline does not mount a service account token or define RBAC because
+  backend discovery uses Kubernetes Service DNS, not EndpointSlice watches.
 - The baseline route disables `cache` and route `rate_limit` because both are
   per-pod features. Enable them only when per-pod scope is acceptable, or enforce
   global behavior at ingress or with a future shared backend.

@@ -75,11 +75,13 @@ See the [configuration reference](docs/configuration.md) and
 [operations runbook](docs/operations.md). Kubernetes deployment guidance is in
 [the hardened baseline](docs/deployment-kubernetes.md), with multi-replica
 state behavior documented in
-[the Kubernetes state model](docs/kubernetes-multi-replica.md). VM/bare-metal
-guidance is in [the systemd baseline](docs/deployment-systemd.md). Incident and
-upgrade procedures are in [runbooks](docs/runbooks.md). Protocol coverage is
-tracked in the [compatibility matrix](docs/compatibility.md), and managed load
-balancer guidance is in [cloud load balancer notes](docs/cloud-load-balancers.md).
+[the Kubernetes state model](docs/kubernetes-multi-replica.md) and backend
+membership documented in
+[service discovery and shared state](docs/service-discovery-shared-state.md).
+VM/bare-metal guidance is in [the systemd baseline](docs/deployment-systemd.md).
+Incident and upgrade procedures are in [runbooks](docs/runbooks.md). Protocol
+coverage is tracked in the [compatibility matrix](docs/compatibility.md), and
+managed load balancer guidance is in [cloud load balancer notes](docs/cloud-load-balancers.md).
 The production cutover checklist is in
 [production transition](docs/production-transition.md), with recovery drills in
 [disaster recovery](docs/disaster-recovery.md).

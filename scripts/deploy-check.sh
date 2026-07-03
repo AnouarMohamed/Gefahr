@@ -29,6 +29,19 @@ check_systemd_unit() {
   systemd-analyze verify --root="$root" goproxy.service
 }
 
+check_kubernetes_service_discovery_contract() {
+  local manifest="$1"
+  echo "validating kubernetes service-discovery contract"
+  if ! grep -q 'automountServiceAccountToken: false' "$manifest"; then
+    echo "kubernetes baseline must not mount a service account token for Service DNS discovery" >&2
+    exit 1
+  fi
+  if grep -Eq '^kind: (Role|ClusterRole|RoleBinding|ClusterRoleBinding)$' "$manifest"; then
+    echo "kubernetes baseline must not add RBAC while discovery uses Service DNS only" >&2
+    exit 1
+  fi
+}
+
 extract_kubernetes_config() {
   local manifest="$1"
   local output="$2"
@@ -62,6 +75,7 @@ check_config configs/proxy.vps.yaml
 
 extract_kubernetes_config deploy/kubernetes/goproxy.yaml "$TMPDIR/kubernetes-proxy.yaml"
 check_config "$TMPDIR/kubernetes-proxy.yaml"
+check_kubernetes_service_discovery_contract deploy/kubernetes/goproxy.yaml
 
 if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
   echo "validating compose model"

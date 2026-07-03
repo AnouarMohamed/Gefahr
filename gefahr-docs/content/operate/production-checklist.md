@@ -32,6 +32,9 @@ Use this checklist before routing production traffic through Gefahr.
 - For Kubernetes replicas greater than one, cache, rate limits, backend health,
   and metrics are reviewed as per-pod behavior unless another control provides
   global behavior.
+- Kubernetes backend URLs point at stable Services or explicitly approved
+  external load balancers; the baseline does not use EndpointSlice or external
+  discovery watchers.
 - Upstream TLS CA, SNI, and client cert settings are tested in staging.
 
 ## Deployment

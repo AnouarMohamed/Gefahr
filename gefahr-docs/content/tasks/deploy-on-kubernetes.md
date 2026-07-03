@@ -13,6 +13,8 @@ checks, PodDisruptionBudget, non-root runtime, and private admin access.
 For multi-replica behavior, see [Run multiple Kubernetes replicas](kubernetes-multi-replica.md).
 Cache entries, route rate-limit counters, backend health observations, metrics,
 and reload snapshots are local to each pod.
+For backend membership and shared-state boundaries, see
+[Service discovery and shared state](service-discovery-shared-state.md).
 
 ## Deployment shape
 
@@ -26,6 +28,9 @@ A production deployment should include:
 - Readiness and liveness probes.
 - A NetworkPolicy that limits admin access.
 - A PodDisruptionBudget.
+
+The baseline does not mount a service account token or define RBAC because
+backend discovery uses Kubernetes Service DNS, not EndpointSlice watches.
 
 ## Pin the image
 

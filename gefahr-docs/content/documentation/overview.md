@@ -50,10 +50,12 @@ New users should read:
 Operators should read:
 
 1. [Deploy on Kubernetes](#/tasks/deploy-on-kubernetes)
-2. [Observability](#/operate/observability)
-3. [Reloads and rollbacks](#/operate/reloads-and-rollbacks)
-4. [Troubleshooting](#/operate/troubleshooting)
-5. [Production checklist](#/operate/production-checklist)
+2. [Run multiple Kubernetes replicas](#/tasks/kubernetes-multi-replica)
+3. [Service discovery and shared state](#/tasks/service-discovery-shared-state)
+4. [Observability](#/operate/observability)
+5. [Reloads and rollbacks](#/operate/reloads-and-rollbacks)
+6. [Troubleshooting](#/operate/troubleshooting)
+7. [Production checklist](#/operate/production-checklist)
 
 Security reviewers should read:
 
@@ -71,9 +73,10 @@ Gefahr deliberately leaves some responsibilities to surrounding infrastructure:
 | Internet DDoS absorption | Cloud load balancer, CDN, provider edge |
 | Full WAF rule engine | Dedicated WAF or API gateway |
 | ACME certificate automation | Ingress, load balancer, cert manager, or deployment pipeline |
-| Dynamic service discovery | Orchestrator or config delivery system |
+| Dynamic service discovery | Kubernetes Service, load balancer, or config delivery system |
 | User authentication | Application, identity proxy, or API gateway |
 | Distributed cache coherence | CDN or application cache layer |
+| Global rate limits | Ingress, API gateway, or future shared counter backend |
 
 This split keeps the proxy understandable. The configuration file should answer
 what traffic is accepted, where it goes, how it is bounded, and how operators

@@ -21,6 +21,9 @@ EndpointSlice discovery.
 - Runtime state is local to each pod unless a future feature explicitly adds
   shared state.
 
+For the detailed discovery contract, see
+[Service discovery and shared state](service-discovery-shared-state.md).
+
 ## Local state
 
 These values are per pod:
