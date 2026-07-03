@@ -80,3 +80,6 @@ a control-plane feature. A safe implementation needs:
 
 Until those pieces exist, use Kubernetes Services or a separately operated load
 balancer as the backend membership boundary.
+
+If scaling requirements need route, tenant, backend, or region ownership, use
+the [scaling and sharding](scaling-sharding.md) contract before adding code.

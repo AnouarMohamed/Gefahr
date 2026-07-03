@@ -68,3 +68,6 @@ freshness metrics, and operator documentation.
 
 Until then, use Kubernetes Services or a separately operated load balancer as
 the backend membership boundary.
+
+If scaling requirements need route, tenant, backend, or region ownership, use
+the [Scaling and sharding](scaling-sharding.md) contract before adding code.

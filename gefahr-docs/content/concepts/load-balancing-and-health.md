@@ -23,6 +23,10 @@ Use `round_robin` for most stateless upstreams. Use `least_connections` when
 requests have uneven duration and you want to avoid piling work onto one
 backend.
 
+These strategies do not provide sticky sessions or stable client-to-backend
+affinity. Put affinity in the ingress/load balancer or remove the application
+dependency on affinity.
+
 ## Health checks
 
 Each pool defines an active health probe:

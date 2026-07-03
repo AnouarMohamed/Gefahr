@@ -41,6 +41,8 @@ configure backend URLs as stable Service DNS names, such as
 
 The detailed discovery and shared-state contract is documented in
 [service discovery and shared state](service-discovery-shared-state.md).
+The broader scale and sharding contract is documented in
+[scaling and sharding](scaling-sharding.md).
 
 Direct EndpointSlice watching is out of scope for the current product. Use it
 only after adding a clear consistency model, RBAC permissions, endpoint-change
@@ -89,6 +91,7 @@ with local pod state:
 - Leader election or coordinated control-plane behavior.
 - Direct EndpointSlice or external discovery that changes backend membership
   without a normal Deployment rollout.
+- Built-in shard ownership or session-affinity behavior.
 
 Until those features exist, document rate limits, cache, health, and metrics as
 per-pod behavior in production runbooks and dashboards.

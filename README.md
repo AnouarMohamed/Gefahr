@@ -78,6 +78,8 @@ state behavior documented in
 [the Kubernetes state model](docs/kubernetes-multi-replica.md) and backend
 membership documented in
 [service discovery and shared state](docs/service-discovery-shared-state.md).
+[Scaling and sharding](docs/scaling-sharding.md) covers capacity, affinity, and
+future shard ownership boundaries.
 VM/bare-metal guidance is in [the systemd baseline](docs/deployment-systemd.md).
 Incident and upgrade procedures are in [runbooks](docs/runbooks.md). Protocol
 coverage is tracked in the [compatibility matrix](docs/compatibility.md), and
@@ -142,12 +144,12 @@ are authored under `gefahr-docs/content` and built into the static site.
   committed.
 
 Version 1 does not include HTTP/3, ACME, dynamic service discovery, distributed
-caching, global rate-limit counters, shared backend health, cache
-revalidation, `Vary` variants, a mutation API, WAF behavior, or per-route
-authentication. Static request policies are not a full WAF or bot
-classification system. The response write timeout limits very long-lived
-streams; WebSocket-specific behavior is not an acceptance target. See
-[security and limitations](docs/security.md).
+caching, global rate-limit counters, shared backend health, built-in sharding,
+session affinity, cache revalidation, `Vary` variants, a mutation API, WAF
+behavior, or per-route authentication. Static request policies are not a full
+WAF or bot classification system. The response write timeout limits very
+long-lived streams; WebSocket-specific behavior is not an acceptance target.
+See [security and limitations](docs/security.md).
 
 ## License
 

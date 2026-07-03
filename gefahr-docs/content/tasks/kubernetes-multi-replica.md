@@ -23,6 +23,8 @@ EndpointSlice discovery.
 
 For the detailed discovery contract, see
 [Service discovery and shared state](service-discovery-shared-state.md).
+For capacity, affinity, and future shard ownership boundaries, see
+[Scaling and sharding](scaling-sharding.md).
 
 ## Local state
 
@@ -75,6 +77,7 @@ Add an external backend only when production requirements need:
 - Cross-pod backend health decisions.
 - Leader election or coordinated control-plane behavior.
 - Direct EndpointSlice or external service-discovery integration.
+- Built-in shard ownership or session-affinity behavior.
 
 Until those features exist, dashboards and runbooks should label rate limits,
 cache, backend health, and metrics as per-pod behavior.

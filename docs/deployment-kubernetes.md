@@ -13,6 +13,8 @@ cache entries, rate-limit counters, load-balancer counters, reload snapshots,
 and process metrics are local to each pod.
 For backend membership and shared-state boundaries, read
 [service discovery and shared state](service-discovery-shared-state.md).
+For capacity, affinity, and future sharding boundaries, read
+[scaling and sharding](scaling-sharding.md).
 
 Before applying it to a real cluster:
 

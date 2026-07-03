@@ -35,6 +35,9 @@ Use this checklist before routing production traffic through Gefahr.
 - Kubernetes backend URLs point at stable Services or explicitly approved
   external load balancers; the baseline does not use EndpointSlice or external
   discovery watchers.
+- Any required session affinity, tenant routing, region routing, or shard
+  ownership is implemented by ingress/load-balancer/deployment topology, not
+  assumed to exist inside Gefahr.
 - Upstream TLS CA, SNI, and client cert settings are tested in staging.
 
 ## Deployment

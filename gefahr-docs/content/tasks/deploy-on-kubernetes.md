@@ -15,6 +15,8 @@ Cache entries, route rate-limit counters, backend health observations, metrics,
 and reload snapshots are local to each pod.
 For backend membership and shared-state boundaries, see
 [Service discovery and shared state](service-discovery-shared-state.md).
+For capacity, affinity, and future shard ownership boundaries, see
+[Scaling and sharding](scaling-sharding.md).
 
 ## Deployment shape
 

@@ -38,6 +38,8 @@ observability, and lifecycle behavior.
 - gRPC is not a declared compatibility target.
 - Global rate limits, distributed cache coherence, shared backend health, and
   direct EndpointSlice discovery are not part of the current target.
+- Built-in sharding, tenant ownership, and sticky-session affinity are not part
+  of the current target.
 - Provider-specific behavior for every managed load balancer is not guaranteed.
 - Full WAF or bot classification behavior is not included.
 

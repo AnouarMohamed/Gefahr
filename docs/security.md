@@ -38,6 +38,6 @@ restart.
 Gefahr has scoped admin bearer tokens, but no external identity provider
 integration, adaptive bot classification, full WAF rule engine, HTTP/3, ACME
 client, dynamic service discovery, distributed cache, global rate-limit
-counters, shared backend health coordinator, or configuration mutation API.
-Place the admin listener on a trusted network and add external controls where
-those capabilities are required.
+counters, shared backend health coordinator, built-in sharding, sticky-session
+affinity, or configuration mutation API. Place the admin listener on a trusted
+network and add external controls where those capabilities are required.

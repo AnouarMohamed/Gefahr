@@ -18,6 +18,10 @@ trusted proxy CIDR. Active probes update health on thresholds; real
 transport failures provide passive evidence and may eject a backend before the
 next probe.
 
+Pool balancing does not provide sticky sessions or shard ownership. Affinity,
+tenant partitioning, and region routing belong in ingress, load-balancer, or
+deployment topology until an explicit sharding model exists.
+
 `httputil.ReverseProxy` streams messages and handles HTTP framing. Bounded
 per-pool transports own connection pooling, upstream deadlines, and HTTPS
 upstream trust/client-certificate policy. Safe replayable requests may be

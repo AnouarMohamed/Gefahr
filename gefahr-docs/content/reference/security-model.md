@@ -54,5 +54,7 @@ Gefahr does not include:
 - Distributed cache coherence.
 - Global rate-limit counters.
 - Shared backend health coordination.
+- Built-in sharding or tenant ownership.
+- Sticky-session affinity.
 
 Place external controls around Gefahr where those features are required.
