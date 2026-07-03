@@ -34,6 +34,9 @@ suite tests the following compatibility paths over real sockets:
 - WebSocket-specific behavior is not part of the acceptance target.
 - gRPC is not a declared compatibility target even though the underlying Go
   HTTP/2 stack handles HTTP/2 framing.
+- Global rate limits, distributed cache coherence, shared backend health, and
+  direct EndpointSlice discovery are not part of the current compatibility
+  target.
 - Provider-specific behavior for every managed load balancer is not guaranteed
   by the generic test suite. Validate your exact cloud load balancer, ingress
   controller, TLS policy, idle timeout, and forwarding-header behavior before a

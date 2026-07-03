@@ -89,8 +89,10 @@ rate_limit:
   max_keys: 10000
 ```
 
-Rate limits are per route and per trusted client identity. Keep `max_keys`
-bounded so an attacker cannot create unbounded client-identity state.
+Rate limits are per route and per trusted client identity. In Kubernetes with
+multiple replicas, counters are also per pod; they are not global cluster
+limits. Keep `max_keys` bounded so an attacker cannot create unbounded
+client-identity state.
 
 ## Metrics
 

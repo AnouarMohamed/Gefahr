@@ -38,8 +38,10 @@ data:
         strategy: round_robin
         cache:
           enabled: false
+        # Route rate limits are per pod in multi-replica deployments. Enable
+        # only when that scope is intended, or enforce global limits upstream.
         rate_limit:
-          enabled: true
+          enabled: false
           requests: 300
           window: 1m
           max_keys: 10000
@@ -91,6 +93,7 @@ metadata:
     app.kubernetes.io/name: goproxy
 spec:
   replicas: 2
+  minReadySeconds: 5
   selector:
     matchLabels:
       app.kubernetes.io/name: goproxy
@@ -103,6 +106,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: goproxy
+      annotations:
+        goproxy.anr.org/config-version: "replace-on-config-change"
     spec:
       automountServiceAccountToken: false
       terminationGracePeriodSeconds: 45

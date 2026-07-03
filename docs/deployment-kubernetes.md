@@ -6,6 +6,12 @@ filesystem, no service account token, secret-backed admin token, exec probes,
 ClusterIP services, and an admin-only NetworkPolicy for a `monitoring`
 namespace.
 
+For multi-replica behavior, read the
+[Kubernetes multi-replica state model](kubernetes-multi-replica.md). The
+baseline treats each pod as a stateless data-plane replica: backend health,
+cache entries, rate-limit counters, load-balancer counters, reload snapshots,
+and process metrics are local to each pod.
+
 Before applying it to a real cluster:
 
 1. Replace the `goproxy-admin` secret value.
@@ -45,13 +51,18 @@ Operational expectations:
 - Keep the admin Service restricted by NetworkPolicy and bearer authentication;
   the Kubernetes baseline binds the admin listener inside the pod so Prometheus
   or other monitoring workloads can scrape it through that restricted Service.
+- The baseline route disables `cache` and route `rate_limit` because both are
+  per-pod features. Enable them only when per-pod scope is acceptable, or enforce
+  global behavior at ingress or with a future shared backend.
 - Set `client_ip.trusted_proxies` to the CIDRs of your ingress/load-balancer
   hops, not to broad cluster ranges unless every source in that range is trusted
   to sanitize the configured `client_ip.headers`. Gefahr rejects
   `client_ip.trusted_proxies` without an explicit header list.
 - Use `maxUnavailable: 0` during rolling updates so at least one old pod remains
-  available while new pods become ready.
+  available while new pods become ready. Keep `minReadySeconds` non-zero so a
+  pod must remain ready briefly before rollout progresses.
 - Watch `goproxy_requests_total`, `goproxy_retries_total`, backend health
   gauges, cache outcomes, and process runtime metrics during rollout.
-- Treat ConfigMap changes as restart-triggering deployment changes; do not rely
-  on Kubernetes automatically sending `SIGHUP`.
+- Treat ConfigMap changes as restart-triggering deployment changes. Bump the
+  pod-template `goproxy.anr.org/config-version` annotation or another checksum
+  annotation; do not rely on Kubernetes automatically sending `SIGHUP`.

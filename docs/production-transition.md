@@ -34,11 +34,16 @@ path, observability, and rollback process are ready together.
   behavior.
 - Per-route rate limits are configured only where the operational owner accepts
   the budget.
+- For Kubernetes replicas greater than one, cache, rate limits, backend health,
+  and metrics are reviewed as per-pod behavior unless an external control
+  provides global behavior.
 - Upstream TLS CA/SNI/client certificate settings are validated in staging.
 
 ## Deployment
 
 - Kubernetes or systemd deployment path is selected and rehearsed.
+- Kubernetes config-only changes bump a pod-template config version or checksum
+  annotation so pods roll with the new ConfigMap.
 - Admin listener is private and protected with `admin.auth_token_env` or scoped
   `admin.tokens[]`.
 - Public TLS and upstream TLS secrets are mounted read-only.

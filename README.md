@@ -73,12 +73,14 @@ the file with `-config`.
 
 See the [configuration reference](docs/configuration.md) and
 [operations runbook](docs/operations.md). Kubernetes deployment guidance is in
-[the hardened baseline](docs/deployment-kubernetes.md); VM/bare-metal guidance
-is in [the systemd baseline](docs/deployment-systemd.md). Incident and upgrade
-procedures are in [runbooks](docs/runbooks.md). Protocol coverage is tracked in
-the [compatibility matrix](docs/compatibility.md), and managed load balancer
-guidance is in [cloud load balancer notes](docs/cloud-load-balancers.md). The
-production cutover checklist is in
+[the hardened baseline](docs/deployment-kubernetes.md), with multi-replica
+state behavior documented in
+[the Kubernetes state model](docs/kubernetes-multi-replica.md). VM/bare-metal
+guidance is in [the systemd baseline](docs/deployment-systemd.md). Incident and
+upgrade procedures are in [runbooks](docs/runbooks.md). Protocol coverage is
+tracked in the [compatibility matrix](docs/compatibility.md), and managed load
+balancer guidance is in [cloud load balancer notes](docs/cloud-load-balancers.md).
+The production cutover checklist is in
 [production transition](docs/production-transition.md), with recovery drills in
 [disaster recovery](docs/disaster-recovery.md).
 
@@ -138,8 +140,9 @@ are authored under `gefahr-docs/content` and built into the static site.
   committed.
 
 Version 1 does not include HTTP/3, ACME, dynamic service discovery, distributed
-caching, cache revalidation, `Vary` variants, a mutation API, WAF behavior, or
-per-route authentication. Static request policies are not a full WAF or bot
+caching, global rate-limit counters, shared backend health, cache
+revalidation, `Vary` variants, a mutation API, WAF behavior, or per-route
+authentication. Static request policies are not a full WAF or bot
 classification system. The response write timeout limits very long-lived
 streams; WebSocket-specific behavior is not an acceptance target. See
 [security and limitations](docs/security.md).

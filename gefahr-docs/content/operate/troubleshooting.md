@@ -39,10 +39,11 @@ Check:
 Check:
 
 1. `goproxy_rate_limit_decisions_total{decision="limited"}` by route.
-2. `client_ip.trusted_proxies`.
-3. `client_ip.headers`.
-4. Whether the load balancer sanitizes the configured forwarding header.
-5. Whether many clients are collapsing to the same direct peer identity.
+2. In Kubernetes, whether one pod is limiting or every pod is limiting.
+3. `client_ip.trusted_proxies`.
+4. `client_ip.headers`.
+5. Whether the load balancer sanitizes the configured forwarding header.
+6. Whether many clients are collapsing to the same direct peer identity.
 
 Do not raise limits until identity is verified.
 

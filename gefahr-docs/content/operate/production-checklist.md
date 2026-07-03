@@ -29,6 +29,9 @@ Use this checklist before routing production traffic through Gefahr.
 - Rate limits are intentionally configured and reviewed.
 - `client_ip.trusted_proxies` contains only real ingress or load balancer CIDRs,
   and `client_ip.headers` names only headers those hops sanitize and set.
+- For Kubernetes replicas greater than one, cache, rate limits, backend health,
+  and metrics are reviewed as per-pod behavior unless another control provides
+  global behavior.
 - Upstream TLS CA, SNI, and client cert settings are tested in staging.
 
 ## Deployment
@@ -37,6 +40,8 @@ Use this checklist before routing production traffic through Gefahr.
 - Admin auth is enabled with `admin.auth_token_env` or scoped `admin.tokens[]`.
 - Monitoring uses a scoped read or metrics token instead of the full operator
   token.
+- Kubernetes config-only changes bump a pod-template config version or checksum
+  annotation so pods roll with the new ConfigMap.
 - Public TLS and upstream TLS secrets are mounted read-only.
 - Probes use either a real public route or private `/readyz` with admin auth.
 - Graceful shutdown is shorter than orchestrator termination grace.

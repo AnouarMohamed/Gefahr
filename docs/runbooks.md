@@ -19,7 +19,10 @@ drills and evidence templates are tracked in
    `goproxy_retries_total`, backend health gauges,
    `goproxy_policy_denials_total`, and
    `goproxy_rate_limit_decisions_total{decision="limited"}`.
-5. Continue only after readiness is stable and error/retry rates match the
+5. For Kubernetes, compare those metrics per pod as well as in aggregate; cache,
+   rate-limit counters, backend health, and process metrics are local to each
+   pod.
+6. Continue only after readiness is stable and error/retry rates match the
    previous baseline.
 
 ## Rollback
@@ -58,13 +61,15 @@ used by production.
 ## Unexpected 429
 
 1. Check `goproxy_rate_limit_decisions_total{decision="limited"}` by route.
-2. Confirm `client_ip.trusted_proxies` contains only the real ingress or load
+2. In Kubernetes, check whether only one pod is limiting or every pod is
+   limiting; route rate-limit counters are local to each pod.
+3. Confirm `client_ip.trusted_proxies` contains only the real ingress or load
    balancer CIDRs.
-3. Confirm `client_ip.headers` matches only the headers those trusted hops
+4. Confirm `client_ip.headers` matches only the headers those trusted hops
    sanitize and set.
-4. Verify the ingress sanitizes `X-Forwarded-For` or the configured header;
+5. Verify the ingress sanitizes `X-Forwarded-For` or the configured header;
    otherwise a spoofed chain can collapse many users into the wrong identity.
-5. Increase the route budget only after confirming the limit is too low, not
+6. Increase the route budget only after confirming the limit is too low, not
    masking abusive traffic.
 
 ## Unexpected Policy Denials

@@ -10,6 +10,10 @@ summary: Run Gefahr with a hardened Deployment, private admin Service, probes, N
 Use the Kubernetes deployment when you want orchestrated rollout, health
 checks, PodDisruptionBudget, non-root runtime, and private admin access.
 
+For multi-replica behavior, see [Run multiple Kubernetes replicas](kubernetes-multi-replica.md).
+Cache entries, route rate-limit counters, backend health observations, metrics,
+and reload snapshots are local to each pod.
+
 ## Deployment shape
 
 A production deployment should include:
@@ -83,8 +87,12 @@ goproxy -healthcheck http://127.0.0.1:9090/readyz
 1. Apply config and image changes in staging.
 2. Run a smoke test through the same ingress path used by production.
 3. Deploy one batch.
-4. Watch readiness, 5xx rate, retries, policy denials, and rate limits.
+4. Watch readiness, 5xx rate, retries, policy denials, and rate limits per pod
+   as well as in aggregate.
 5. Continue only after metrics match the previous baseline.
+
+Kubernetes does not restart pods just because a ConfigMap changed. Bump a
+pod-template config version or checksum annotation for config-only rollouts.
 
 ## Rollback
 

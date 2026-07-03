@@ -40,6 +40,10 @@ A backend becomes unhealthy only after consecutive failures reach
 `unhealthy_threshold`. It becomes healthy again after consecutive successes
 reach `healthy_threshold`.
 
+In Kubernetes with multiple replicas, each pod keeps its own health
+observations. One pod can fail readiness for a pool while another pod still has
+healthy reachability.
+
 ## Passive failure evidence
 
 Real transport failures can mark a backend unhealthy before the next probe.

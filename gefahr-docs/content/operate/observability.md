@@ -67,6 +67,10 @@ At minimum, dashboard:
 - `go_goroutines`
 - `go_memstats_alloc_bytes`
 
+In Kubernetes, scrape every pod rather than only a Service aggregate. Backend
+health, cache outcomes, rate-limit decisions, and process metrics are local to
+each pod.
+
 ## Alert candidates
 
 Alert on:

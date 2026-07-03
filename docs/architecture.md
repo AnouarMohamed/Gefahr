@@ -36,3 +36,9 @@ workers are canceled and recreated for the new backend state.
 Public and admin servers share coordinated startup and graceful shutdown. The
 admin listener is deliberately separate so probes and metrics are not exposed
 on the data plane.
+
+In Kubernetes, multiple replicas are independent runtime snapshots behind a
+Service or ingress. Config, secrets, image versions, and backend Service names
+are shared by the deployment platform; active requests, health observations,
+cache entries, rate-limit counters, load-balancer counters, metrics, and reload
+state remain local to each pod.

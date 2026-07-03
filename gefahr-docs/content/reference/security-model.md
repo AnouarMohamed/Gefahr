@@ -52,5 +52,7 @@ Gefahr does not include:
 - Dynamic service discovery.
 - Runtime configuration mutation API.
 - Distributed cache coherence.
+- Global rate-limit counters.
+- Shared backend health coordination.
 
 Place external controls around Gefahr where those features are required.

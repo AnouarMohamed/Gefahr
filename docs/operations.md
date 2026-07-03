@@ -53,6 +53,10 @@ Monitor backend health, retry rate, 5xx rate, cache outcomes, request latency,
 goroutine count. Repeated backend flapping usually means probe thresholds are
 too aggressive or the health endpoint is not representative.
 
+In Kubernetes, scrape every pod rather than only a Service aggregate. Backend
+health, cache outcomes, rate-limit decisions, and process metrics are local to
+each pod.
+
 See [Kubernetes deployment](deployment-kubernetes.md),
 [systemd deployment](deployment-systemd.md), and
 [operations runbooks](runbooks.md) for production rollout and incident guidance.
