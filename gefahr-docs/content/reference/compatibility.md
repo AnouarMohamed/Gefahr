@@ -28,7 +28,8 @@ observability, and lifecycle behavior.
 - HTTPS upstream transports use TLS 1.2 or newer.
 - HTTPS upstreams attempt HTTP/2 where supported.
 - Forwarding headers are rebuilt before backend dispatch.
-- Trusted client identity requires trusted proxy CIDRs.
+- Trusted client identity requires trusted proxy CIDRs and explicit
+  `client_ip.headers`.
 
 ## Not claimed
 

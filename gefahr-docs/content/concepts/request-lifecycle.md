@@ -77,7 +77,8 @@ Policy can reject:
 
 Per-route rate limits use the trusted client identity. By default, that is the
 direct socket peer. If `client_ip.trusted_proxies` is configured, a trusted
-load balancer can supply `X-Forwarded-For` or `X-Real-IP`.
+load balancer can supply only the explicitly configured `client_ip.headers`,
+such as `X-Forwarded-For` or `X-Real-IP`.
 
 Denied requests return `429` with `Retry-After`.
 

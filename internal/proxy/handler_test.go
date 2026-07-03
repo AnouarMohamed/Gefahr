@@ -199,6 +199,7 @@ func TestHandlerReplacesUntrustedForwardingHeaders(t *testing.T) {
 func TestHandlerUsesTrustedProxyForwardingHeader(t *testing.T) {
 	cfg := proxyConfig()
 	cfg.ClientIP.TrustedProxies = []string{"10.0.0.0/8"}
+	cfg.ClientIP.Headers = []string{"X-Forwarded-For"}
 	transport := roundTripFunc(func(r *http.Request) (*http.Response, error) {
 		if got := r.Header.Get("X-Forwarded-For"); got != "198.51.100.7" {
 			t.Fatalf("X-Forwarded-For = %q", got)
@@ -550,6 +551,7 @@ func TestHandlerObservesPolicyDenials(t *testing.T) {
 func TestHandlerRateLimitUsesTrustedClientIdentity(t *testing.T) {
 	cfg := proxyConfig()
 	cfg.ClientIP.TrustedProxies = []string{"10.0.0.0/8"}
+	cfg.ClientIP.Headers = []string{"X-Forwarded-For"}
 	cfg.Routes[0].RateLimit = config.RateLimit{Enabled: true, Requests: 1, Window: config.Duration(time.Minute), MaxKeys: 10}
 	h, err := NewHandler(cfg, roundTripFunc(func(*http.Request) (*http.Response, error) {
 		return &http.Response{StatusCode: http.StatusOK, Header: make(http.Header), Body: io.NopCloser(strings.NewReader("ok"))}, nil

@@ -49,6 +49,23 @@ func TestValidateRejectsInvalidAdminTokenEnvironment(t *testing.T) {
 	}
 }
 
+func TestValidateRejectsUnauthenticatedNonLoopbackAdmin(t *testing.T) {
+	cfg := validConfig()
+	cfg.Admin.Address = ":9090"
+	if err := Validate(cfg); err == nil || !strings.Contains(err.Error(), "admin.auth_token_env") {
+		t.Fatalf("error = %v", err)
+	}
+	cfg.Admin.AuthTokenEnv = "GOPROXY_ADMIN_TOKEN"
+	if err := Validate(cfg); err != nil {
+		t.Fatal(err)
+	}
+	cfg.Admin.AuthTokenEnv = ""
+	cfg.Admin.Tokens = []AdminToken{{Name: "monitor", Env: "GOPROXY_MONITOR_TOKEN", Scopes: []string{"read"}}}
+	if err := Validate(cfg); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestValidateRejectsInvalidAdminScopedTokens(t *testing.T) {
 	tests := []func(*Config){
 		func(cfg *Config) {
@@ -120,6 +137,7 @@ func TestValidateRejectsInvalidClientIPPolicy(t *testing.T) {
 	tests := []func(*Config){
 		func(cfg *Config) { cfg.ClientIP.TrustedProxies = []string{"10.0.0.0"} },
 		func(cfg *Config) { cfg.ClientIP.Headers = []string{"X-Forwarded-For"} },
+		func(cfg *Config) { cfg.ClientIP.TrustedProxies = []string{"10.0.0.0/8"} },
 		func(cfg *Config) {
 			cfg.ClientIP.TrustedProxies = []string{"10.0.0.0/8"}
 			cfg.ClientIP.Headers = []string{"Forwarded"}

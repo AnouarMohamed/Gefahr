@@ -10,8 +10,9 @@ Before applying it to a real cluster:
 
 1. Replace the `goproxy-admin` secret value.
 2. Pin the image to the exact release tag you intend to run.
-3. Edit the ConfigMap route hosts, backend URLs, trusted ingress CIDRs, rate
-   limits, cache policy, and any upstream TLS trust material.
+3. Edit the ConfigMap route hosts, backend URLs, trusted ingress CIDRs,
+   trusted forwarding headers, rate limits, cache policy, and any upstream TLS
+   trust material.
 4. Run `make deploy-check` and validate any rendered environment-specific
    config with `goproxy -config <path> -check-config`.
 5. Ensure your cluster enforces NetworkPolicy; otherwise the admin Service is
@@ -46,7 +47,8 @@ Operational expectations:
   or other monitoring workloads can scrape it through that restricted Service.
 - Set `client_ip.trusted_proxies` to the CIDRs of your ingress/load-balancer
   hops, not to broad cluster ranges unless every source in that range is trusted
-  to sanitize `X-Forwarded-For` and `X-Real-IP`.
+  to sanitize the configured `client_ip.headers`. Gefahr rejects
+  `client_ip.trusted_proxies` without an explicit header list.
 - Use `maxUnavailable: 0` during rolling updates so at least one old pod remains
   available while new pods become ready.
 - Watch `goproxy_requests_total`, `goproxy_retries_total`, backend health

@@ -22,6 +22,8 @@ while `health` or `metrics` grants only that endpoint class. Every admin
 request is logged as `admin request completed` with method, path, status, auth
 result, principal, remote address, and duration; authorization headers are
 never logged.
+Startup validation rejects unauthenticated admin listeners that are not bound to
+loopback.
 
 ## Reload
 

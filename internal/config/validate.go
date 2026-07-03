@@ -51,6 +51,9 @@ func Validate(cfg Config) error {
 		errs = append(errs, fmt.Errorf("admin.auth_token_env must match %s", envNamePattern))
 	}
 	errs = append(errs, validateAdminTokens(cfg.Admin.AuthTokenEnv, cfg.Admin.Tokens)...)
+	if !adminAuthConfigured(cfg.Admin) && !loopbackListenAddress(cfg.Admin.Address) {
+		errs = append(errs, errors.New("admin.auth_token_env or admin.tokens is required when admin.address is not loopback"))
+	}
 	if seenListeners[cfg.Admin.Address] {
 		errs = append(errs, errors.New("admin address must differ from public listeners"))
 	}
@@ -176,6 +179,9 @@ func Validate(cfg Config) error {
 	if len(cfg.ClientIP.Headers) > 0 && len(cfg.ClientIP.TrustedProxies) == 0 {
 		errs = append(errs, errors.New("client_ip.headers requires client_ip.trusted_proxies"))
 	}
+	if len(cfg.ClientIP.TrustedProxies) > 0 && len(cfg.ClientIP.Headers) == 0 {
+		errs = append(errs, errors.New("client_ip.trusted_proxies requires explicit client_ip.headers"))
+	}
 	seenClientIPHeaders := map[string]bool{}
 	for i, header := range cfg.ClientIP.Headers {
 		normalized := strings.ToLower(strings.TrimSpace(header))
@@ -197,6 +203,22 @@ func Validate(cfg Config) error {
 		errs = append(errs, errors.New("logging.level must be debug, info, warn, or error"))
 	}
 	return errors.Join(errs...)
+}
+
+func adminAuthConfigured(admin Admin) bool {
+	return admin.AuthTokenEnv != "" || len(admin.Tokens) > 0
+}
+
+func loopbackListenAddress(address string) bool {
+	host, _, err := net.SplitHostPort(address)
+	if err != nil {
+		return false
+	}
+	if strings.EqualFold(host, "localhost") {
+		return true
+	}
+	addr, err := netip.ParseAddr(host)
+	return err == nil && addr.IsLoopback()
 }
 
 func validateAdminTokens(legacyEnv string, tokens []AdminToken) []error {

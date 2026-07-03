@@ -1,6 +1,8 @@
 # Configuration reference
 
-The complete example is [`configs/proxy.example.yaml`](../configs/proxy.example.yaml).
+The local example is [`configs/proxy.example.yaml`](../configs/proxy.example.yaml).
+For a production VPS starting point, use
+[`configs/proxy.vps.yaml`](../configs/proxy.vps.yaml).
 Durations use Go syntax such as `250ms`, `30s`, and `2m`.
 Configuration input is capped at 4 MiB and topology counts are bounded to
 prevent pathological startup or reload memory use.
@@ -16,8 +18,10 @@ connection limit.
 - `listeners`: one or more public addresses. Optional `tls.cert_file` and
   `tls.key_file` enable TLS 1.2+ for that listener.
 - `admin.address`: private liveness, readiness, and metrics listener.
-  `admin.auth_token_env` optionally names an environment variable containing a
-  full-scope bearer token required for all admin endpoints.
+  `admin.auth_token_env` names an environment variable containing a full-scope
+  bearer token required for all admin endpoints. Authentication is required
+  whenever `admin.address` is not loopback, and it should still be enabled for
+  production loopback deployments.
   `admin.tokens[]` can add named scoped bearer tokens loaded from environment
   variables. Supported scopes are `health`, `metrics`, `read` (health and
   metrics), and `admin`. Changing any admin field requires a restart.
@@ -58,7 +62,8 @@ ignores inbound forwarding headers. Configure `client_ip.trusted_proxies` only
 for ingress or load-balancer CIDRs that sanitize and set forwarding headers.
 When the direct peer matches one of those CIDRs, Gefahr evaluates
 `client_ip.headers` in order. Supported headers are `X-Forwarded-For` and
-`X-Real-IP`; when headers are omitted, that order is used by default.
+`X-Real-IP`. `client_ip.headers` is required whenever
+`client_ip.trusted_proxies` is set so the trusted identity contract is explicit.
 
 For `X-Forwarded-For`, Gefahr walks the chain from right to left, skips trusted
 proxy hops, and uses the first untrusted address. This avoids trusting a
@@ -82,7 +87,8 @@ only be used for isolated diagnostics.
 
 Unknown fields, duplicate routes/listeners, nonexistent pool references,
 invalid URLs, incomplete upstream TLS pairs, invalid route policies, invalid
-admin token scopes, invalid trusted proxy CIDRs, non-positive limits, and
-invalid durations are rejected together with field-oriented errors. Route, pool,
-backend, and admin token identifiers use at most 128 ASCII letters, digits,
-dots, underscores, and hyphens.
+admin token scopes, unauthenticated non-loopback admin listeners, invalid or
+incomplete trusted proxy policy, non-positive limits, and invalid durations are
+rejected together with field-oriented errors. Route, pool, backend, and admin
+token identifiers use at most 128 ASCII letters, digits, dots, underscores, and
+hyphens.

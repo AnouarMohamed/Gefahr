@@ -7,6 +7,8 @@ services:
         VERSION: ${GOPROXY_VERSION:-dev}
         COMMIT: ${GOPROXY_COMMIT:-unknown}
     command: ["-config", "/etc/goproxy/proxy.yaml"]
+    environment:
+      GOPROXY_ADMIN_TOKEN: ${GOPROXY_ADMIN_TOKEN:-compose-demo-token}
     configs:
       - source: proxy_config
         target: /etc/goproxy/proxy.yaml

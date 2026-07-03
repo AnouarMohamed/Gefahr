@@ -3,8 +3,8 @@
 Gefahr treats HTTP parsing and framing as a security boundary and delegates it
 to Go's standard library. It ignores client-provided forwarding chains unless
 the direct peer matches a configured trusted proxy CIDR, and then only uses
-supported headers from that trusted hop. Error responses do not expose transport
-details.
+the explicitly configured headers from that trusted hop. Error responses do not
+expose transport details.
 Ambiguous paths containing encoded or double-encoded separators, backslashes,
 or dot segments are rejected before routing so the proxy and backend cannot
 normalize a route boundary differently.

@@ -58,6 +58,7 @@ extract_kubernetes_config() {
 
 check_config configs/proxy.example.yaml
 check_config configs/proxy.compose.yaml
+check_config configs/proxy.vps.yaml
 
 extract_kubernetes_config deploy/kubernetes/goproxy.yaml "$TMPDIR/kubernetes-proxy.yaml"
 check_config "$TMPDIR/kubernetes-proxy.yaml"

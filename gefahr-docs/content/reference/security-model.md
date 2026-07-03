@@ -29,15 +29,16 @@ around that foundation.
 
 Forwarding headers are ignored unless the direct peer is in
 `client_ip.trusted_proxies`. Only configure CIDRs for infrastructure that
-sanitizes and sets those headers.
+sanitizes and sets those headers, and configure `client_ip.headers` with the
+exact trusted header order.
 
 ## Admin boundary
 
 Admin endpoints are for private operations networks. `admin.auth_token_env`
 grants full admin access. `admin.tokens[]` can grant named `health`, `metrics`,
 `read`, or `admin` credentials so monitoring does not need the operator token.
-Even with bearer auth, the admin listener should not be directly
-internet-facing.
+Startup validation rejects unauthenticated non-loopback admin listeners. Even
+with bearer auth, the admin listener should not be directly internet-facing.
 
 ## Known limitations
 

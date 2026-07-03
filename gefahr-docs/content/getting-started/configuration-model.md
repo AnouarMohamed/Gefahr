@@ -90,7 +90,7 @@ include:
 - Ambiguous paths with dot segments or encoded separators.
 - Backend URLs with embedded credentials or fragments.
 - Incomplete upstream mTLS certificate/key pairs.
-- Invalid trusted proxy CIDRs.
+- Invalid or incomplete trusted proxy policy.
 - Non-positive limits or timeouts.
 
 Treat config validation as part of CI, not just startup.

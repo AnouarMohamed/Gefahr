@@ -14,10 +14,11 @@ application routing and upstream forwarding.
 ## Forwarding headers
 
 Gefahr ignores client-provided forwarding headers unless the direct peer
-matches `client_ip.trusted_proxies`.
+matches `client_ip.trusted_proxies` and the header is listed in
+`client_ip.headers`.
 
 Configure only the source CIDRs of load balancers or ingress hops that sanitize
-and set the headers:
+and set the explicit header order:
 
 ```yaml
 client_ip:

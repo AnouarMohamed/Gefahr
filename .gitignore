@@ -10,3 +10,7 @@ coverage.out
 *.pem
 *.key
 .env
+
+# Local agent guidance
+docs/agent-guide/
+docs/vps-production-prompts.md

@@ -1,6 +1,8 @@
 package proxy
 
 import (
+	"errors"
+	"fmt"
 	"net"
 	"net/http"
 	"net/netip"
@@ -9,8 +11,6 @@ import (
 
 	"github.com/anrorg/gefahr/internal/config"
 )
-
-var defaultClientIPHeaders = []string{"X-Forwarded-For", "X-Real-IP"}
 
 type clientIPPolicy struct {
 	trusted []netip.Prefix
@@ -26,10 +26,27 @@ func newClientIPPolicy(cfg config.ClientIP) (*clientIPPolicy, error) {
 		}
 		policy.trusted = append(policy.trusted, prefix)
 	}
-	policy.headers = cfg.Headers
-	if len(policy.trusted) > 0 && len(policy.headers) == 0 {
-		policy.headers = defaultClientIPHeaders
+	if len(policy.trusted) == 0 && len(cfg.Headers) > 0 {
+		return nil, errors.New("client_ip.headers requires client_ip.trusted_proxies")
 	}
+	if len(policy.trusted) > 0 && len(cfg.Headers) == 0 {
+		return nil, errors.New("client_ip.trusted_proxies requires explicit client_ip.headers")
+	}
+	seenHeaders := map[string]bool{}
+	for i, header := range cfg.Headers {
+		normalized := strings.ToLower(strings.TrimSpace(header))
+		if header != strings.TrimSpace(header) {
+			return nil, fmt.Errorf("client_ip.headers[%d] must not contain surrounding whitespace", i)
+		}
+		if normalized != "x-forwarded-for" && normalized != "x-real-ip" {
+			return nil, fmt.Errorf("client_ip.headers[%d] must be X-Forwarded-For or X-Real-IP", i)
+		}
+		if seenHeaders[normalized] {
+			return nil, fmt.Errorf("client_ip header %q is duplicated", header)
+		}
+		seenHeaders[normalized] = true
+	}
+	policy.headers = cfg.Headers
 	return policy, nil
 }
 

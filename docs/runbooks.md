@@ -60,9 +60,11 @@ used by production.
 1. Check `goproxy_rate_limit_decisions_total{decision="limited"}` by route.
 2. Confirm `client_ip.trusted_proxies` contains only the real ingress or load
    balancer CIDRs.
-3. Verify the ingress sanitizes `X-Forwarded-For` and `X-Real-IP`; otherwise a
-   spoofed chain can collapse many users into the wrong identity.
-4. Increase the route budget only after confirming the limit is too low, not
+3. Confirm `client_ip.headers` matches only the headers those trusted hops
+   sanitize and set.
+4. Verify the ingress sanitizes `X-Forwarded-For` or the configured header;
+   otherwise a spoofed chain can collapse many users into the wrong identity.
+5. Increase the route budget only after confirming the limit is too low, not
    masking abusive traffic.
 
 ## Unexpected Policy Denials

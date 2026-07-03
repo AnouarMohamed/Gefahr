@@ -55,8 +55,10 @@ not add a shell or HTTP utility to the distroless image.
 ## Configuration and operation
 
 Configuration is strict YAML: unknown fields and unsafe values stop startup or
-reject reload. Copy `configs/proxy.example.yaml`, adjust listeners, routes, and
-backend URLs, then pass it with `-config`.
+reject reload. Use `configs/proxy.example.yaml` for local development and
+`configs/proxy.vps.yaml` as the systemd/VPS production starting point. Adjust
+listeners, routes, backend URLs, TLS paths, and admin token settings, then pass
+the file with `-config`.
 
 - `SIGHUP` validates and atomically reloads routes, pools, policies, logging,
   and TLS certificate contents. Existing requests finish on their old snapshot.
@@ -66,7 +68,8 @@ backend URLs, then pass it with `-config`.
 - `SIGINT` and `SIGTERM` stop acceptance and drain requests within
   `timeouts.shutdown`.
 - The admin listener should remain private. It exposes `/livez`, `/readyz`, and
-  `/metrics`.
+  `/metrics`. Non-loopback admin listeners must configure bearer
+  authentication, and production loopback deployments should do the same.
 
 See the [configuration reference](docs/configuration.md) and
 [operations runbook](docs/operations.md). Kubernetes deployment guidance is in
@@ -123,7 +126,8 @@ are authored under `gefahr-docs/content` and built into the static site.
 ## Security model and limitations
 
 - Client forwarding headers are discarded and rebuilt from the trusted
-  connection metadata.
+  connection metadata. Trusted proxy CIDRs require an explicit trusted header
+  order.
 - Request headers, bodies, network operations, cache memory, and shutdown are
   bounded.
 - Per-route request policies can allowlist methods, deny path prefixes, require

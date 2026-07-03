@@ -27,7 +27,8 @@ Use this checklist before routing production traffic through Gefahr.
 - Route `policy` matches allowed methods, denied paths, ingress headers, and
   query-size expectations.
 - Rate limits are intentionally configured and reviewed.
-- `client_ip.trusted_proxies` contains only real ingress or load balancer CIDRs.
+- `client_ip.trusted_proxies` contains only real ingress or load balancer CIDRs,
+  and `client_ip.headers` names only headers those hops sanitize and set.
 - Upstream TLS CA, SNI, and client cert settings are tested in staging.
 
 ## Deployment

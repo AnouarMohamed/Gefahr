@@ -11,7 +11,7 @@ suite tests the following compatibility paths over real sockets:
 | Client HTTP/2 over TLS to public listener | Tested | `TestHTTP2ClientOverTLS` starts a TLS public server with HTTP/2 enabled and verifies the client negotiated HTTP/2. |
 | Proxy to cleartext HTTP/1.1 upstream | Tested | The real-socket routing, balancing, caching, reload, and retry tests use cleartext upstreams. |
 | Proxy to HTTPS upstream with HTTP/2 | Tested | `TestHTTP2UpstreamOverTLS` uses a TLS upstream with HTTP/2 enabled and a configured CA file. |
-| Forwarding headers behind trusted ingress | Tested | Unit coverage verifies untrusted forwarding headers are replaced, and trusted proxy CIDRs are required before forwarded client identity is used. |
+| Forwarding headers behind trusted ingress | Tested | Unit coverage verifies untrusted forwarding headers are replaced, and trusted proxy CIDRs plus explicit header order are required before forwarded client identity is used. |
 | Admin health and metrics | Tested | Unit and Compose smoke coverage verify `/livez`, `/readyz`, `/metrics`, bearer auth, and executable health checks. |
 
 ## Supported Expectations
@@ -22,7 +22,8 @@ suite tests the following compatibility paths over real sockets:
   configured and attempt HTTP/2 where the upstream supports it.
 - Incoming hop-by-hop and forwarding headers are rebuilt before backend
   dispatch; route matching does not trust client-supplied forwarding chains
-  unless the direct peer matches `client_ip.trusted_proxies`.
+  unless the direct peer matches `client_ip.trusted_proxies` and the header is
+  listed in `client_ip.headers`.
 - The proxy is intended to sit behind a cloud load balancer, ingress
   controller, or host firewall that owns internet-facing TLS automation,
   DDoS/WAF policy, and source-network restrictions.
@@ -45,7 +46,8 @@ For any external load balancer or ingress:
 1. Forward only intended public listener ports to Gefahr.
 2. Keep the admin listener private and separately restricted.
 3. Set `client_ip.trusted_proxies` to the source CIDRs of the load balancer or
-   ingress hops that sanitize and set `X-Forwarded-For` or `X-Real-IP`.
+   ingress hops that sanitize and set the explicit `client_ip.headers` order,
+   such as `X-Forwarded-For`.
 4. Make the load balancer health check match the deployment model:
    public-data-plane checks should hit a route backed by an upstream, while
    private management checks should hit `/readyz` with the admin bearer token.

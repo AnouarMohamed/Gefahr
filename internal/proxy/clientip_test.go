@@ -3,6 +3,7 @@ package proxy
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/anrorg/gefahr/internal/config"
@@ -38,9 +39,25 @@ func TestClientIPPolicyAcceptsRealIPWithPort(t *testing.T) {
 	}
 }
 
+func TestClientIPPolicyRequiresExplicitTrustedHeaders(t *testing.T) {
+	tests := []config.ClientIP{
+		{TrustedProxies: []string{"10.0.0.0/8"}},
+		{Headers: []string{"X-Forwarded-For"}},
+		{TrustedProxies: []string{"10.0.0.0/8"}, Headers: []string{"Forwarded"}},
+		{TrustedProxies: []string{"10.0.0.0/8"}, Headers: []string{" X-Forwarded-For"}},
+		{TrustedProxies: []string{"10.0.0.0/8"}, Headers: []string{"X-Real-IP", "x-real-ip"}},
+	}
+	for i, cfg := range tests {
+		_, err := newClientIPPolicy(cfg)
+		if err == nil || !strings.Contains(err.Error(), "client_ip") {
+			t.Fatalf("case %d error = %v", i, err)
+		}
+	}
+}
+
 func clientIPPolicyForTest(t *testing.T) *clientIPPolicy {
 	t.Helper()
-	policy, err := newClientIPPolicy(config.ClientIP{TrustedProxies: []string{"10.0.0.0/8"}})
+	policy, err := newClientIPPolicy(config.ClientIP{TrustedProxies: []string{"10.0.0.0/8"}, Headers: []string{"X-Forwarded-For", "X-Real-IP"}})
 	if err != nil {
 		t.Fatal(err)
 	}

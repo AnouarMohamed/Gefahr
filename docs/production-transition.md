@@ -28,7 +28,8 @@ path, observability, and rollback process are ready together.
 - `timeouts.*` values match expected client, load balancer, and upstream
   behavior.
 - `limits.*` values are sized for production traffic and host capacity.
-- `client_ip.trusted_proxies` contains only ingress/load-balancer source CIDRs.
+- `client_ip.trusted_proxies` contains only ingress/load-balancer source CIDRs,
+  and `client_ip.headers` names only the headers those hops sanitize and set.
 - Per-route `policy` guardrails match the public API contract and ingress
   behavior.
 - Per-route rate limits are configured only where the operational owner accepts
@@ -91,7 +92,7 @@ environment:
 operator:
 deployment path:
 load balancer or ingress:
-trusted proxy CIDRs:
+trusted proxy CIDRs and headers:
 acceptance command output:
 coverage output:
 deployment validation output:

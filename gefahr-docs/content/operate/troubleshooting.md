@@ -40,8 +40,9 @@ Check:
 
 1. `goproxy_rate_limit_decisions_total{decision="limited"}` by route.
 2. `client_ip.trusted_proxies`.
-3. Whether the load balancer sanitizes `X-Forwarded-For`.
-4. Whether many clients are collapsing to the same direct peer identity.
+3. `client_ip.headers`.
+4. Whether the load balancer sanitizes the configured forwarding header.
+5. Whether many clients are collapsing to the same direct peer identity.
 
 Do not raise limits until identity is verified.
 

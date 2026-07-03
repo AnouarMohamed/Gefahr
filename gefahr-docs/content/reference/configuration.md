@@ -37,7 +37,9 @@ admin:
 ```
 
 `auth_token_env` is a backward-compatible full-scope admin token. Use
-`admin.tokens[]` for named scoped credentials.
+`admin.tokens[]` for named scoped credentials. Startup validation rejects an
+admin listener that is not bound to loopback unless `admin.auth_token_env` or
+`admin.tokens[]` is configured.
 
 Supported scopes:
 
@@ -50,6 +52,26 @@ Supported scopes:
 
 Changing `admin.address`, `admin.auth_token_env`, or `admin.tokens[]` requires
 a restart.
+
+## Client IP
+
+By default, Gefahr uses the direct socket peer as the client identity and
+ignores incoming forwarding headers. Configure `client_ip.trusted_proxies` only
+for ingress or load balancer CIDRs that sanitize forwarded client identity, and
+always configure the exact header order with `client_ip.headers`.
+
+```yaml
+client_ip:
+  trusted_proxies:
+    - 10.0.0.0/8
+  headers:
+    - X-Forwarded-For
+    - X-Real-IP
+```
+
+Supported headers are `X-Forwarded-For` and `X-Real-IP`. Startup validation
+rejects `client_ip.trusted_proxies` without an explicit `client_ip.headers`
+list.
 
 ## Route
 

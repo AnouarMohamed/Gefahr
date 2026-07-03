@@ -25,7 +25,7 @@ test-integration-race:
 	go test -race -tags=integration ./test/integration
 
 load-check:
-	go run ./cmd/loadcheck
+	GOPROXY_ADMIN_TOKEN=$${GOPROXY_ADMIN_TOKEN:-compose-demo-token} go run ./cmd/loadcheck
 
 deploy-check:
 	./scripts/deploy-check.sh

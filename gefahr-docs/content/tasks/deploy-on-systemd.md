@@ -21,6 +21,11 @@ Recommended layout:
 /var/lib/goproxy/
 ```
 
+Use `configs/proxy.vps.yaml` as the starting config for VPS deployments. It
+binds public TLS on `:443`, keeps admin on `127.0.0.1:9090`, requires
+`GOPROXY_ADMIN_TOKEN`, and leaves trusted proxy headers disabled until you
+explicitly configure a load balancer or reverse proxy.
+
 The environment file should contain secrets such as:
 
 ```sh
@@ -30,8 +35,8 @@ GOPROXY_ADMIN_TOKEN=replace-with-a-real-token
 Use restrictive permissions:
 
 ```sh
-sudo chown root:goproxy /etc/goproxy/goproxy.env
-sudo chmod 0640 /etc/goproxy/goproxy.env
+sudo chown root:root /etc/goproxy/goproxy.env
+sudo chmod 0600 /etc/goproxy/goproxy.env
 ```
 
 Validate the config before copying it into place or reloading the service:
@@ -50,11 +55,12 @@ make deploy-check
 
 The service should:
 
-- Run as a non-root user when binding high ports.
+- Run as the non-root `goproxy` user.
 - Use `NoNewPrivileges=true`.
 - Restrict writable paths.
 - Mount private keys read-only.
 - Restart on failure.
+- Run `goproxy -check-config` before startup.
 - Use `ExecReload` to send `SIGHUP`.
 
 ## Reload config
@@ -82,4 +88,6 @@ sudo systemctl restart goproxy
 ## Host firewall
 
 Expose only the public listener to clients. Restrict the admin listener to
-loopback or a private management network.
+loopback or a private management network, and keep bearer authentication
+enabled. For the shipped VPS config, expose `443/tcp` publicly and do not expose
+`9090/tcp`.

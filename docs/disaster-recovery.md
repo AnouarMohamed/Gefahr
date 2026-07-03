@@ -29,7 +29,8 @@ Keep these recoverable outside the failed host or cluster:
 - Public TLS certificate/key references.
 - Upstream CA bundle and client certificate/key references, when enabled.
 - Kubernetes manifests or systemd unit files used for the running deployment.
-- Load balancer listener/routing policy and trusted proxy CIDR settings.
+- Load balancer listener/routing policy, trusted proxy CIDRs, and trusted
+  forwarding-header order.
 
 ## Drill 1: Bad Config Rollback
 
@@ -137,7 +138,8 @@ load balancer.
 2. Disable one staging region/provider path or remove it from the load balancer
    backend set.
 3. Confirm traffic drains to the surviving path.
-4. Confirm trusted proxy CIDRs still match the active ingress path.
+4. Confirm trusted proxy CIDRs and `client_ip.headers` still match the active
+   ingress path.
 5. Restore the failed path and confirm traffic can return without config drift.
 
 Evidence to capture:
@@ -151,7 +153,7 @@ traffic steering control:
 drain command/change:
 readyz by location:
 request success by location:
-trusted proxy CIDR validation:
+trusted proxy validation:
 restore command/change:
 total failover duration:
 follow-up items:
